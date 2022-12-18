@@ -1,7 +1,7 @@
 package com.microsservice.cad.cadunico.builder;
 
 import com.microsservice.cad.cadunico.dominio.Client;
-import com.microsservice.cad.cadunico.service.ClientDTO;
+import com.microsservice.cad.cadunico.service.dto.ClientDTO;
 import org.springframework.stereotype.Component;
 
 import java.util.Arrays;

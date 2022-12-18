@@ -1,4 +1,4 @@
-package com.microsservice.cad.cadunico.service;
+package com.microsservice.cad.cadunico.service.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

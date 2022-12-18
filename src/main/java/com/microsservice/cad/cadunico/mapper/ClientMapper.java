@@ -1,7 +1,7 @@
 package com.microsservice.cad.cadunico.mapper;
 
 import com.microsservice.cad.cadunico.dominio.Client;
-import com.microsservice.cad.cadunico.service.ClientDTO;
+import com.microsservice.cad.cadunico.service.dto.ClientDTO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
