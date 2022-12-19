@@ -74,5 +74,19 @@ public class ClientResourceIntTest {
 
     }
 
+    @Test
+    public void buscarTodosClient() throws Exception {
+        var dto = clientBuilder.retornaClientsDTO();
+
+        Mockito.when(clientService.findall()).thenReturn(dto);
+
+        var request = MockMvcRequestBuilders.get(API).accept(MediaType.APPLICATION_JSON);
+
+        mockMvc.perform(request)
+                .andDo(print())
+                .andExpect(status().isOk());
+
+    }
+
 
 }
