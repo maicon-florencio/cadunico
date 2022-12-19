@@ -28,7 +28,7 @@ public class ClientResource {
     @PutMapping
     public ResponseEntity<ClientDTO> atualizarCliente(@RequestBody ClientDTO dto){
         log.info("Chamada servico atualizar ");
-        return ResponseEntity.ok(clientService.save(dto));
+        return ResponseEntity.ok(clientService.update(dto));
     }
 
     @DeleteMapping("/{id}")

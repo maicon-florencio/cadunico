@@ -4,6 +4,7 @@ import com.microsservice.cad.cadunico.exception.BusinessException;
 import com.microsservice.cad.cadunico.service.ClientService;
 import com.microsservice.cad.cadunico.service.dto.ClientDTO;
 import com.microsservice.cad.cadunico.util.ClientUtil;
+import com.microsservice.cad.cadunico.util.ErroMsgutil;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,10 +13,12 @@ import java.util.List;
 public class ClientServiceImpl implements ClientService {
     @Override
     public ClientDTO save(ClientDTO dto) {
-        if(dto == null) throw  new BusinessException("Client not found null");
+        if(dto == null) throw  new BusinessException(ErroMsgutil.ERRO_CLIENTE_NOT_FOUND);
 
-        if(!ClientUtil.isCPF(dto.getDocumento()) && dto.getDocumento().length() < 11)
-            throw new BusinessException("CPF invalid");
+        if(!ClientUtil.isCNPJ(dto.getDocumento())) throw  new BusinessException(ErroMsgutil.ERRO_CNPJ_INVALIDO);
+
+        if(!ClientUtil.isCPF(dto.getDocumento()))  throw new BusinessException(ErroMsgutil.ERRO_CPF_INVALIDO);
+
 
         return null;
     }
