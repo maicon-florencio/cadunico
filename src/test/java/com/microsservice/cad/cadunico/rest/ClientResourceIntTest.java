@@ -1,5 +1,6 @@
 package com.microsservice.cad.cadunico.rest;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsservice.cad.cadunico.builder.ClientBuilder;
 import com.microsservice.cad.cadunico.service.ClientService;
 import com.microsservice.cad.cadunico.service.dto.ClientDTO;
@@ -41,14 +42,17 @@ public class ClientResourceIntTest {
 
         Mockito.when(clientService.save(Mockito.any())).thenReturn(dto);
 
-        var request = MockMvcRequestBuilders.post(API).accept(MediaType.APPLICATION_JSON);
+        var request = MockMvcRequestBuilders.post(API)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(new ObjectMapper().writeValueAsString(dto) )
+                .accept(MediaType.APPLICATION_JSON);
 
         mockMvc.perform(request)
                 .andDo(print())
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("id").isNotEmpty())
                 .andExpect(jsonPath("nome").value(dto.getNome()))
-                .andExpect(jsonPath("documento").value(dto.getDocumento()))
-                .andExpect(jsonPath("status").value(dto.getStatus()));
+                .andExpect(jsonPath("documento").value(dto.getDocumento()));
 
 
         Assertions.assertEquals(dto.getNome(),"Juarez Rodrigues");
@@ -85,6 +89,8 @@ public class ClientResourceIntTest {
         mockMvc.perform(request)
                 .andDo(print())
                 .andExpect(status().isOk());
+
+        Assertions.assertNotNull(dto);
 
     }
 
