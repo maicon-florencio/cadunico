@@ -14,9 +14,7 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public ClientDTO save(ClientDTO dto) {
         if(dto == null) throw  new BusinessException(ErroMsgutil.ERRO_CLIENTE_NOT_FOUND);
-
         if(!ClientUtil.isCNPJ(dto.getDocumento())) throw  new BusinessException(ErroMsgutil.ERRO_CNPJ_INVALIDO);
-
         if(!ClientUtil.isCPF(dto.getDocumento()))  throw new BusinessException(ErroMsgutil.ERRO_CPF_INVALIDO);
 
 
