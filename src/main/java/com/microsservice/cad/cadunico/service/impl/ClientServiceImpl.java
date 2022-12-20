@@ -10,10 +10,11 @@ import com.microsservice.cad.cadunico.util.ErroMsgutil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
 import java.util.List;
-import java.util.Objects;
 
 @Service
+@Transactional
 public class ClientServiceImpl implements ClientService {
 
 
@@ -52,7 +53,6 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public void deleteById(Long id) {
         if(!clientRepository.existsById(id)) throw new BusinessException(ErroMsgutil.ERRO_CLIENTE_NOT_FOUND);
-
         clientRepository.deleteById(id);
     }
 
