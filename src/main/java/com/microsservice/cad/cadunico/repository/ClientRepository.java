@@ -1,4 +1,4 @@
-package com.microsservice.cad.cadunico.repositorio;
+package com.microsservice.cad.cadunico.repository;
 
 import com.microsservice.cad.cadunico.dominio.Client;
 import org.springframework.data.jpa.repository.JpaRepository;

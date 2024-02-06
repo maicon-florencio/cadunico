@@ -10,6 +10,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -24,5 +25,8 @@ public class Client implements Serializable {
     private String nome;
     private String documento;
     private Boolean status;
+    private String cargo;
+    private Integer anosExpCargo;
+    private BigDecimal salario;
 
 }

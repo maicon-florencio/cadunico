@@ -2,7 +2,7 @@ package com.microsservice.cad.cadunico.service.impl;
 
 import com.microsservice.cad.cadunico.exception.BusinessException;
 import com.microsservice.cad.cadunico.mapper.ClientMapper;
-import com.microsservice.cad.cadunico.repositorio.ClientRepository;
+import com.microsservice.cad.cadunico.repository.ClientRepository;
 import com.microsservice.cad.cadunico.service.ClientService;
 import com.microsservice.cad.cadunico.service.dto.ClientDTO;
 import com.microsservice.cad.cadunico.util.ClientUtil;

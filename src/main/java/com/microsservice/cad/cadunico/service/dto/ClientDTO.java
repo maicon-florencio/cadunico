@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 @Data
 @Builder
@@ -17,5 +18,9 @@ public class ClientDTO  implements Serializable {
     private String nome;
     private String documento;
     private Boolean status;
+
+    private String cargo;
+    private Integer anosExpCargo;
+    private BigDecimal salario;
 
 }
