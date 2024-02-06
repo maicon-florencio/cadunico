@@ -12,7 +12,7 @@ import java.math.BigDecimal;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class ClientDTO  implements Serializable {
+public class ColaboradorDTO implements Serializable {
 
     private Long id;
     private String nome;

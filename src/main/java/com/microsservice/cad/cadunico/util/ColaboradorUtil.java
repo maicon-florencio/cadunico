@@ -2,7 +2,7 @@ package com.microsservice.cad.cadunico.util;
 
 import java.util.InputMismatchException;
 
-public class ClientUtil {
+public class ColaboradorUtil {
 
     public static boolean isCPF(String CPF) {
 

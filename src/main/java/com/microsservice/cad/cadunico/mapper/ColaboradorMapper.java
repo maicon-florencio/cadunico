@@ -1,7 +1,7 @@
 package com.microsservice.cad.cadunico.mapper;
 
-import com.microsservice.cad.cadunico.dominio.Client;
-import com.microsservice.cad.cadunico.service.dto.ClientDTO;
+import com.microsservice.cad.cadunico.dominio.Colaborador;
+import com.microsservice.cad.cadunico.service.dto.ColaboradorDTO;
 import org.mapstruct.InheritInverseConfiguration;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -10,22 +10,22 @@ import org.mapstruct.factory.Mappers;
 import java.util.List;
 
 @Mapper(componentModel = "spring",uses = {})
-public interface ClientMapper {
+public interface ColaboradorMapper {
 
-    ClientMapper INSTANCE = Mappers.getMapper(ClientMapper.class);
+    ColaboradorMapper INSTANCE = Mappers.getMapper(ColaboradorMapper.class);
 
     @Mapping(source ="entity.id" ,target = "id")
     @Mapping(source ="entity.nome" ,target = "nome")
     @Mapping(source ="entity.documento" ,target = "documento")
     @Mapping(source ="entity.status" ,target = "status")
-    ClientDTO toDTO(Client entity);
+    ColaboradorDTO toDTO(Colaborador entity);
 
 
     @InheritInverseConfiguration
-    Client toEntity(ClientDTO dto);
+    Colaborador toEntity(ColaboradorDTO dto);
 
-    List<Client> toEnties (List<ClientDTO> dtos);
+    List<Colaborador> toEnties (List<ColaboradorDTO> dtos);
 
-    List<ClientDTO> toDTOs (List<Client> entities);
+    List<ColaboradorDTO> toDTOs (List<Colaborador> entities);
 
 }

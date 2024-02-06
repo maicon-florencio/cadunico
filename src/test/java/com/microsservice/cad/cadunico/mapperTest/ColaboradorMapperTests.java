@@ -1,23 +1,23 @@
-package com.microsservice.cad.cadunico.mappertests;
+package com.microsservice.cad.cadunico.mapperTest;
 
-import com.microsservice.cad.cadunico.builder.ClientBuilder;
-import com.microsservice.cad.cadunico.mapper.ClientMapper;
+import com.microsservice.cad.cadunico.builder.ColaboradorBuilder;
+import com.microsservice.cad.cadunico.mapper.ColaboradorMapper;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-public class ClientMapperTests {
+public class ColaboradorMapperTests {
     @Autowired
-    private ClientBuilder cBuilder;
+    private ColaboradorBuilder cBuilder;
 
     @Test
     public void covertEntityToDTO(){
 
         var entity = cBuilder.retornaClientCPF();
 
-        var dto = ClientMapper.INSTANCE.toDTO(entity);
+        var dto = ColaboradorMapper.INSTANCE.toDTO(entity);
 
         Assertions.assertNotNull(dto);
         Assertions.assertEquals(dto.getNome(),entity.getNome());
@@ -29,7 +29,7 @@ public class ClientMapperTests {
 
         var dto = cBuilder.retornaClientDTOCPF();
 
-        var entity = ClientMapper.INSTANCE.toEntity(dto);
+        var entity = ColaboradorMapper.INSTANCE.toEntity(dto);
 
         Assertions.assertNotNull(entity);
         Assertions.assertEquals(entity.getNome(),dto.getNome());
@@ -40,7 +40,7 @@ public class ClientMapperTests {
     @Test
     public void convertEntitiesToDTOs(){
         var entities = cBuilder.retornaClients();
-        var dtos = ClientMapper.INSTANCE.toDTOs(entities);
+        var dtos = ColaboradorMapper.INSTANCE.toDTOs(entities);
 
         Assertions.assertNotNull(dtos);
         Assertions.assertEquals(dtos.size(),entities.size());
@@ -51,7 +51,7 @@ public class ClientMapperTests {
     @Test
     public void convertDTOsToEntities(){
         var dtos = cBuilder.retornaClientsDTO();
-        var entities = ClientMapper.INSTANCE.toEnties(dtos);
+        var entities = ColaboradorMapper.INSTANCE.toEnties(dtos);
 
         Assertions.assertNotNull(entities);
         Assertions.assertEquals(entities.size(),dtos.size());

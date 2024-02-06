@@ -1,17 +1,17 @@
 package com.microsservice.cad.cadunico.service.chain;
 
-import com.microsservice.cad.cadunico.service.dto.ClientDTO;
+import com.microsservice.cad.cadunico.service.dto.ColaboradorDTO;
 import lombok.Getter;
 
 @Getter
 public class AcrescimoProcessContext {
-    private ClientDTO context;
+    private ColaboradorDTO context;
     private Object processResult;
 
-    public AcrescimoProcessContext() { this.context =  ClientDTO.builder().build();  }
+    public AcrescimoProcessContext() { this.context =  ColaboradorDTO.builder().build();  }
 
     public void reset(){
-        context = ClientDTO.builder().build();
+        context = ColaboradorDTO.builder().build();
         processResult = null;
     }
 

@@ -1,32 +1,25 @@
 package com.microsservice.cad.cadunico.dominio;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 import java.math.BigDecimal;
-
-@Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 @Entity
-public class Client implements Serializable {
 
+public class Cargo implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String nome;
-    private String documento;
-    private Boolean status;
-    private String cargo;
-    private Integer anosExpCargo;
+    private String nomeCargo;
     private BigDecimal salario;
+    private String lvCargo;
+    private LocalDate dtInicioCargo;
+    private LocalDate dtFimCargo;
+    private LocalDateTime dtUpdated;
+
 
 }

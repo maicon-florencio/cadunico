@@ -1,9 +1,9 @@
 package com.microsservice.cad.cadunico.rest;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.microsservice.cad.cadunico.builder.ClientBuilder;
+import com.microsservice.cad.cadunico.builder.ColaboradorBuilder;
 import com.microsservice.cad.cadunico.exception.BusinessException;
-import com.microsservice.cad.cadunico.service.ClientService;
+import com.microsservice.cad.cadunico.service.ColaboradorServiceInt;
 import com.microsservice.cad.cadunico.util.ErroMsgutil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -22,16 +22,16 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class ClientResourceIntTest {
+public class ColaboradorControllerIntTest {
 
     @Autowired
     private MockMvc mockMvc;
 
     @MockBean
-    private ClientService clientService;
+    private ColaboradorServiceInt clientService;
 
     @Autowired
-    private ClientBuilder clientBuilder;
+    private ColaboradorBuilder clientBuilder;
 
 
     private static String API = "/api/v1/clients";
