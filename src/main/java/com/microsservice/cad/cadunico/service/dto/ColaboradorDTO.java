@@ -18,9 +18,5 @@ public class ColaboradorDTO implements Serializable {
     private String nome;
     private String documento;
     private Boolean status;
-
-    private String cargo;
-    private Integer anosExpCargo;
-    private BigDecimal salario;
-
+    private CargoDTO cargo;
 }

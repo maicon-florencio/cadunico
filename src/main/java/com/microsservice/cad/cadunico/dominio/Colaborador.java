@@ -5,10 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Data
@@ -24,6 +21,10 @@ public class Colaborador implements Serializable {
     private String nome;
     private String documento;
     private Boolean status;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "cargo_id", referencedColumnName = "id")
+    private Cargo cargo;
+
 
 
 }

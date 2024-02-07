@@ -18,15 +18,15 @@ public class RequiredFields extends AcrescimoProcessoStep{
         if(Objects.isNull(context.getContext())){
             throw new AttributeNotFoundException(camposFaltantes.append("Entity is null.").toString());
         }else{
-            if(context.getContext().getCargo().isEmpty()){
+            if(context.getContext().getCargo().getNomeCargo().isEmpty()){
                 camposFaltantes.append(" Cargo não informado").append(N);
             }
 
-            if( Objects.nonNull(context.getContext().getAnosExpCargo())){
+            if( Objects.nonNull(context.getContext().getCargo().getAnosExperienciaArea() <=0)){
                 camposFaltantes.append(" Anos Experiencia vazio.").append(N);
             }
 
-            if( Objects.isNull(context.getContext().getSalario()) || context.getContext().getSalario().equals(BigDecimal.ZERO)){
+            if( Objects.isNull(context.getContext().getCargo().getSalario()) || context.getContext().getCargo().getSalario().equals(BigDecimal.ZERO)){
                 camposFaltantes.append(" Salario zerado ou null ").append(N);
             }
 
