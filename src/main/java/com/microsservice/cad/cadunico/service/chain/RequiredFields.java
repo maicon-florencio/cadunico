@@ -27,11 +27,14 @@ public class RequiredFields extends AcrescimoProcessoStep{
             }
 
             if( Objects.isNull(context.getContext().getCargo().getSalario()) || context.getContext().getCargo().getSalario().equals(BigDecimal.ZERO)){
-                camposFaltantes.append(" Salario zerado ou null ").append(N);
+                camposFaltantes.append(" Salario zerado ou null. ").append(N);
+            }
+            if(Boolean.FALSE.equals(context.getContext().getStatus())){
+                camposFaltantes.append(" Colaborador inativo. ").append(N);
             }
 
         }
-        if(camposFaltantes.length() > 0) throw new Exception(" Campos Faltantes : " + camposFaltantes);
+        if(camposFaltantes.length() > 0) throw new Exception(" Campos Faltantes : \n" + camposFaltantes);
 
         return next(context,true);
     }

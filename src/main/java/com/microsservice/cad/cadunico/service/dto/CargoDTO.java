@@ -16,7 +16,7 @@ import java.time.LocalDateTime;
 public class CargoDTO implements Serializable {
     private Long id;
     private String nomeCargo;
-    private BigDecimal salario;
+    private Double salario;
     private String lvCargo;
     private LocalDate dtInicioCargo;
     private LocalDate dtFimCargo;

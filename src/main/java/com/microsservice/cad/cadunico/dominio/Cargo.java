@@ -21,7 +21,7 @@ public class Cargo  {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String nomeCargo;
-    private BigDecimal salario;
+    private Double salario;
     private String lvCargo;
     private LocalDate dtInicioCargo;
     private LocalDate dtFimCargo;
