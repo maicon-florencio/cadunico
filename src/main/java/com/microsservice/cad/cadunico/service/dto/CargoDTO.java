@@ -6,7 +6,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 @Data
@@ -17,7 +16,7 @@ public class CargoDTO implements Serializable {
     private Long id;
     private String nomeCargo;
     private Double salario;
-    private String lvCargo;
+    private String maturidade;
     private LocalDate dtInicioCargo;
     private LocalDate dtFimCargo;
     private Integer anosExperienciaArea;

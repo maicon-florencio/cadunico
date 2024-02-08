@@ -16,12 +16,11 @@ public class AumentoSalarioTempCasa extends AcrescimoProcessoStep{
         if(dtInic.isBefore(LocalDate.now())
                 && (Objects.isNull(context.getContext().getCargo().getDtFimCargo()))){
 
-            if(ChronoUnit.YEARS.between(LocalDate.now(),dtInic) >= 1 || ChronoUnit.YEARS.between(LocalDate.now(),dtInic) <=3 ){
-
+            if((ChronoUnit.YEARS.between(LocalDate.now(),dtInic) >= 1) || (ChronoUnit.YEARS.between(LocalDate.now(),dtInic) <=3) ){
+                var salarioAtual =  context.getContext().getCargo().getSalario();
+                context.getContext().getCargo().setSalario(salarioAtual + ((salarioAtual * 10)/100));
             }
-
         }
-
         return next(context,true);
     }
 }
