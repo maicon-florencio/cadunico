@@ -12,11 +12,13 @@ public class AumentoSalarioTempCasa extends AcrescimoProcessoStep{
 
     @Override
     public AcrescimoProcessContext execute(AcrescimoProcessContext context) throws Exception {
+
+
         var dtInic = context.getContext().getCargo().getDtInicioCargo();
         if(dtInic.isBefore(LocalDate.now())
                 && (Objects.isNull(context.getContext().getCargo().getDtFimCargo()))){
 
-            if((ChronoUnit.YEARS.between(LocalDate.now(),dtInic) >= 1) || (ChronoUnit.YEARS.between(LocalDate.now(),dtInic) <=3) ){
+            if((ChronoUnit.YEARS.between(dtInic,LocalDate.now()) >= 1) && (ChronoUnit.YEARS.between(dtInic,LocalDate.now()) <=3) ){
                 var salarioAtual =  context.getContext().getCargo().getSalario();
                 context.getContext().getCargo().setSalario(salarioAtual + ((salarioAtual * 10)/100));
             }
