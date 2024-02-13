@@ -1,5 +1,8 @@
 package com.microsservice.cad.cadunico.service.chain;
 
+import lombok.Getter;
+
+
 public abstract class AcrescimoProcessoStep {
     protected AcrescimoProcessoStep nextStep;
     protected Object[] args;

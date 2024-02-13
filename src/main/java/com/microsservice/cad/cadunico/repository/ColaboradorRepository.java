@@ -8,5 +8,6 @@ import org.springframework.stereotype.Repository;
 public interface ColaboradorRepository extends JpaRepository<Colaborador,Long> {
 
      Boolean getClientByDocumento(String doc);
+     Colaborador getColaboradorByDocumento(String doc);
 
 }

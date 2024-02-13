@@ -1,0 +1,73 @@
+package com.microsservice.cad.cadunico.service.impl;
+
+import com.microsservice.cad.cadunico.exception.BusinessException;
+import com.microsservice.cad.cadunico.mapper.ColaboradorMapper;
+import com.microsservice.cad.cadunico.repository.ColaboradorRepository;
+import com.microsservice.cad.cadunico.service.chain.AcrescimoProcessContext;
+import com.microsservice.cad.cadunico.service.chain.FacadeChainStartService;
+import com.microsservice.cad.cadunico.service.chain.ServiceCatalog;
+import com.microsservice.cad.cadunico.service.dto.ColaboradorDTO;
+import com.microsservice.cad.cadunico.util.ColaboradorUtil;
+import com.microsservice.cad.cadunico.util.ErroMsgutil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import javax.transaction.Transactional;
+import java.util.List;
+import java.util.Objects;
+
+@Service
+@Transactional
+public class ColaboradorService {
+
+
+    @Autowired
+    private ColaboradorRepository colaboradorRepository;
+
+
+    public ColaboradorDTO save(ColaboradorDTO dto) {
+        if(dto == null) throw  new BusinessException(ErroMsgutil.ERRO_CLIENTE_NOT_FOUND);
+        if(colaboradorRepository.getClientByDocumento(dto.getDocumento())) throw  new BusinessException(ErroMsgutil.ERRO_CLIENTE_CADASTRADO);
+
+        this.validarDocumento(dto.getDocumento());
+        var produtoSave =  colaboradorRepository.save(ColaboradorMapper.INSTANCE.toEntity(dto));
+        return ColaboradorMapper.INSTANCE.toDTO(produtoSave);
+    }
+
+    public ColaboradorDTO update(ColaboradorDTO dto) {
+        if(!colaboradorRepository.existsById(dto.getId())) throw new BusinessException(ErroMsgutil.ERRO_CLIENTE_NOT_FOUND);
+        var clienteUpdated = colaboradorRepository.save(ColaboradorMapper.INSTANCE.toEntity(dto));
+        return ColaboradorMapper.INSTANCE.toDTO(clienteUpdated);
+    }
+
+    public ColaboradorDTO findById(Long id) {
+        if(id == null && !colaboradorRepository.existsById(id)) throw new BusinessException(ErroMsgutil.ERRO_CLIENTE_NOT_FOUND);
+        return ColaboradorMapper.INSTANCE.toDTO(colaboradorRepository.getOne(id));
+    }
+
+    public List<ColaboradorDTO> findall() {
+        return ColaboradorMapper.INSTANCE.toDTOs(colaboradorRepository.findAll());
+    }
+
+    public void deleteById(Long id) {
+        if(!colaboradorRepository.existsById(id)) throw new BusinessException(ErroMsgutil.ERRO_CLIENTE_NOT_FOUND);
+        colaboradorRepository.deleteById(id);
+    }
+
+    private void validarDocumento(String doc){
+        if(!ColaboradorUtil.isCNPJ(doc)) throw new BusinessException(ErroMsgutil.ERRO_CNPJ_INVALIDO);
+        if(!ColaboradorUtil.isCPF(doc))  throw new BusinessException(ErroMsgutil.ERRO_CPF_INVALIDO);
+    }
+
+    public ColaboradorDTO growUpAmountSalary(String documento){
+        var colaboradorFound =  colaboradorRepository.getColaboradorByDocumento(documento);
+        var context =  new AcrescimoProcessContext();
+        context.reset();
+        context.put(colaboradorFound);
+
+        AcrescimoProcessContext result = (AcrescimoProcessContext) FacadeChainStartService.run(ServiceCatalog.acrescimoSalarioSolicitacao,context);
+        return ColaboradorMapper.INSTANCE.toDTO(Objects.isNull(result.getContext()) ? colaboradorFound : result.getContext());
+    }
+
+
+}

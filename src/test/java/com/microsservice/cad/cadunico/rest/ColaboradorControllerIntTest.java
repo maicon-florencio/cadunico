@@ -3,7 +3,7 @@ package com.microsservice.cad.cadunico.rest;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.microsservice.cad.cadunico.builder.ColaboradorBuilder;
 import com.microsservice.cad.cadunico.exception.BusinessException;
-import com.microsservice.cad.cadunico.service.ColaboradorServiceInt;
+import com.microsservice.cad.cadunico.service.impl.ColaboradorService;
 import com.microsservice.cad.cadunico.util.ErroMsgutil;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -28,7 +28,7 @@ public class ColaboradorControllerIntTest {
     private MockMvc mockMvc;
 
     @MockBean
-    private ColaboradorServiceInt clientService;
+    private ColaboradorService clientService;
 
     @Autowired
     private ColaboradorBuilder clientBuilder;
