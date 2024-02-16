@@ -2,6 +2,7 @@ package com.microsservice.cad.cadunico.service.impl;
 
 import com.microsservice.cad.cadunico.exception.BusinessException;
 import com.microsservice.cad.cadunico.mapper.ColaboradorMapper;
+import com.microsservice.cad.cadunico.repository.CargoRepository;
 import com.microsservice.cad.cadunico.repository.ColaboradorRepository;
 import com.microsservice.cad.cadunico.service.chain.AcrescimoProcessContext;
 import com.microsservice.cad.cadunico.service.chain.FacadeChainStartService;
@@ -23,12 +24,13 @@ public class ColaboradorService {
 
     @Autowired
     private ColaboradorRepository colaboradorRepository;
+    @Autowired
+    private CargoRepository cargoRepository;
 
 
     public ColaboradorDTO save(ColaboradorDTO dto) {
         if(dto == null) throw  new BusinessException(ErroMsgutil.ERRO_CLIENTE_NOT_FOUND);
         if(colaboradorRepository.getClientByDocumento(dto.getDocumento())) throw  new BusinessException(ErroMsgutil.ERRO_CLIENTE_CADASTRADO);
-
         this.validarDocumento(dto.getDocumento());
         var produtoSave =  colaboradorRepository.save(ColaboradorMapper.INSTANCE.toEntity(dto));
         return ColaboradorMapper.INSTANCE.toDTO(produtoSave);
@@ -64,8 +66,10 @@ public class ColaboradorService {
         var context =  new AcrescimoProcessContext();
         context.reset();
         context.put(colaboradorFound);
-
         AcrescimoProcessContext result = (AcrescimoProcessContext) FacadeChainStartService.run(ServiceCatalog.acrescimoSalarioSolicitacao,context);
+        if(!colaboradorFound.getCargo().getSalario().equals(result.getContext().getCargo().getSalario())){
+            cargoRepository.save(result.getContext().getCargo());
+        }
         return ColaboradorMapper.INSTANCE.toDTO(Objects.isNull(result.getContext()) ? colaboradorFound : result.getContext());
     }
 
