@@ -27,7 +27,7 @@ public class ColaboradorMapperTests {
     @Test
     public void covertDTOToEntity(){
 
-        var dto = cBuilder.retornaClientDTOCPF();
+        var dto = cBuilder.retornaColaboradorDTOCPF();
 
         var entity = ColaboradorMapper.INSTANCE.toEntity(dto);
 

@@ -30,16 +30,12 @@ public class ColaboradorControllerIntTest {
     @MockBean
     private ColaboradorService clientService;
 
-    @Autowired
-    private ColaboradorBuilder clientBuilder;
-
-
-    private static String API = "/api/v1/clients";
+    private static String API = "/api/v1/colaboradores";
 
     @Test
     public void createClient() throws Exception {
 
-        var dto = clientBuilder.retornaClientDTOCPF();
+        var dto = ColaboradorBuilder.retornaColaboradorDTOCPF();
 
         Mockito.when(clientService.save(Mockito.any())).thenReturn(dto);
 
@@ -65,7 +61,7 @@ public class ColaboradorControllerIntTest {
     @Test
     public void createClientCPFinvalido() throws Exception {
 
-        var dto = clientBuilder.retornaClientDTOCPF();
+        var dto = ColaboradorBuilder.retornaColaboradorDTOCPF();
 
         dto.setDocumento("1111111111");
 
@@ -86,7 +82,7 @@ public class ColaboradorControllerIntTest {
     @Test
     public void updateClient() throws Exception {
 
-        var dtoUpdated = clientBuilder.retornaClientDTOCPF();
+        var dtoUpdated = ColaboradorBuilder.retornaColaboradorDTOCPF();
         dtoUpdated.setId(1L);
         dtoUpdated.setNome("MAriazinha");
 
@@ -116,7 +112,7 @@ public class ColaboradorControllerIntTest {
 
     @Test
     public void buscarClientPorId() throws Exception {
-        var dto = clientBuilder.retornaClientDTOCPF();
+        var dto = ColaboradorBuilder.retornaColaboradorDTOCPF();
 
         dto.setId(1L);
         Mockito.when(clientService.findById(Mockito.anyLong())).thenReturn(dto);
@@ -146,7 +142,7 @@ public class ColaboradorControllerIntTest {
 
     @Test
     public void buscarTodosClient() throws Exception {
-        var dto = clientBuilder.retornaClientsDTO();
+        var dto = ColaboradorBuilder.retornaClientsDTO();
 
         Mockito.when(clientService.findall()).thenReturn(dto);
 
