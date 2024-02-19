@@ -19,6 +19,15 @@ public class ColaboradorBuilder {
                 .cargo(CargoBuilder.createDto())
                 .build();
     }
+    public static Colaborador retornaClientCPF(){
+        return  Colaborador.builder()
+                .id(1L)
+                .nome("Juarez Rodrigues")
+                .documento("257.049.330-92")
+                .status(Boolean.TRUE)
+                .cargo(CargoBuilder.createEntity())
+                .build();
+    }
     public static ColaboradorDTO retornaColaboradorDTOCNPJ(){
         return  ColaboradorDTO.builder()
                 .id(2L)
@@ -36,21 +45,13 @@ public class ColaboradorBuilder {
         return Arrays.asList(cl1,cl2);
     }
 
-    public static Colaborador retornaClientCPF(){
-        return  Colaborador.builder()
-                .id(1L)
-                .nome("Maira Duarte")
-                .documento("768.809.640-52")
-                .status(Boolean.TRUE)
-                .cargo(CargoBuilder.createEntity())
-                .build();
-    }
+
 
     public static Colaborador retornaClientCNPJ(){
         return  Colaborador.builder()
                 .id(2L)
-                .nome("Burguer KING")
-                .documento("65.229.873/0001-16")
+                .nome("MC Donalds")
+                .documento("38.837.157/0001-49")
                 .status(Boolean.TRUE)
                 .cargo(CargoBuilder.entities().get(1))
                 .build();

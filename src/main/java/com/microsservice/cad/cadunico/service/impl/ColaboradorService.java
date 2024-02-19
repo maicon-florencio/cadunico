@@ -29,22 +29,22 @@ public class ColaboradorService {
 
 
     public ColaboradorDTO save(ColaboradorDTO dto) {
-        if(dto == null) throw  new BusinessException(ErroMsgutil.ERRO_CLIENTE_NOT_FOUND);
-        if(colaboradorRepository.getClientByDocumento(dto.getDocumento())) throw  new BusinessException(ErroMsgutil.ERRO_CLIENTE_CADASTRADO);
+        if(dto == null) throw  new BusinessException(ErroMsgutil.ERRO_COLABORADOR_NOT_FOUND);
+        if(colaboradorRepository.getClientByDocumento(dto.getDocumento())) throw  new BusinessException(ErroMsgutil.ERRO_COLABORADOR_CADASTRADO);
         this.validarDocumento(dto.getDocumento());
         var produtoSave =  colaboradorRepository.save(ColaboradorMapper.INSTANCE.toEntity(dto));
         return ColaboradorMapper.INSTANCE.toDTO(produtoSave);
     }
 
     public ColaboradorDTO update(ColaboradorDTO dto) {
-        if(!colaboradorRepository.existsById(dto.getId())) throw new BusinessException(ErroMsgutil.ERRO_CLIENTE_NOT_FOUND);
+        if(!colaboradorRepository.existsById(dto.getId())) throw new BusinessException(ErroMsgutil.ERRO_COLABORADOR_NOT_FOUND);
         var clienteUpdated = colaboradorRepository.save(ColaboradorMapper.INSTANCE.toEntity(dto));
         return ColaboradorMapper.INSTANCE.toDTO(clienteUpdated);
     }
 
     public ColaboradorDTO findById(Long id) {
-        if(id == null && !colaboradorRepository.existsById(id)) throw new BusinessException(ErroMsgutil.ERRO_CLIENTE_NOT_FOUND);
-        return ColaboradorMapper.INSTANCE.toDTO(colaboradorRepository.getOne(id));
+        if(id == null || !colaboradorRepository.existsById(id)) throw new BusinessException(ErroMsgutil.ERRO_COLABORADOR_NOT_FOUND);
+        return ColaboradorMapper.INSTANCE.toDTO(colaboradorRepository.getReferenceById(id));
     }
 
     public List<ColaboradorDTO> findall() {
@@ -52,13 +52,16 @@ public class ColaboradorService {
     }
 
     public void deleteById(Long id) {
-        if(!colaboradorRepository.existsById(id)) throw new BusinessException(ErroMsgutil.ERRO_CLIENTE_NOT_FOUND);
+        if(!colaboradorRepository.existsById(id)) throw new BusinessException(ErroMsgutil.ERRO_COLABORADOR_NOT_FOUND);
         colaboradorRepository.deleteById(id);
     }
 
     private void validarDocumento(String doc){
-        if(!ColaboradorUtil.isCNPJ(doc)) throw new BusinessException(ErroMsgutil.ERRO_CNPJ_INVALIDO);
-        if(!ColaboradorUtil.isCPF(doc))  throw new BusinessException(ErroMsgutil.ERRO_CPF_INVALIDO);
+        if(ColaboradorUtil.removeCaracteresEspeciais(doc).length() > 11) {
+            if (!ColaboradorUtil.isCNPJ(doc)) throw new BusinessException(ErroMsgutil.ERRO_CNPJ_INVALIDO);
+        }else {
+            if (!ColaboradorUtil.isCPF(doc)) throw new BusinessException(ErroMsgutil.ERRO_CPF_INVALIDO);
+        }
     }
 
     public ColaboradorDTO growUpAmountSalary(String documento){
