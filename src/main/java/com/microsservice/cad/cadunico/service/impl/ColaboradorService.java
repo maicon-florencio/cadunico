@@ -70,11 +70,10 @@ public class ColaboradorService {
         context.reset();
         context.put(colaboradorFound);
         var result = (String) FacadeChainStartService.run(ServiceCatalog.acrescimoSalarioSolicitacao,context);
-        if(result.contains("Acrescimo de")){
-            cargoRepository.save(colaboradorFound.getCargo());
-        }else{
-            throw new BusinessException(result);
-        }
+
+        if(result.contains("Erro:"))  throw new BusinessException(result);
+
+        cargoRepository.save(colaboradorFound.getCargo());
         return ColaboradorMapper.INSTANCE.toDTO( colaboradorFound );
     }
 

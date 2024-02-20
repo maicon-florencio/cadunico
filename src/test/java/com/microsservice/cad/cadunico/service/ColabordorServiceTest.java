@@ -135,5 +135,9 @@ public class ColabordorServiceTest {
         var result = service.growUpAmountSalary(entity.getDocumento());
 
         Assertions.assertNotNull(result);
+        Assertions.assertEquals( 1650.0, result.getCargo().getSalario());
+
+        Mockito.verify(repository, Mockito.times(1)).getColaboradorByDocumento(Mockito.anyString());
+        Mockito.verify(cargoRepository, Mockito.times(1)).save(Mockito.any());
     }
 }
