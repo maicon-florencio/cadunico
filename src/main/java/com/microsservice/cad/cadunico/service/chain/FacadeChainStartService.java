@@ -6,7 +6,7 @@ public class FacadeChainStartService {
             AcrescimoProcessContext result = startProcess.execute(inicialContext);
             return result.getProcessResult();
         }catch (Exception ex){
-            return "Erro: " + ex.getMessage();
+            return "Pendencias : " + ex.getMessage();
         }
 
     }

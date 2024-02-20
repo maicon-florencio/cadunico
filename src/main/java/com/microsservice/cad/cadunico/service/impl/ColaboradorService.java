@@ -69,11 +69,13 @@ public class ColaboradorService {
         var context =  new AcrescimoProcessContext();
         context.reset();
         context.put(colaboradorFound);
-        AcrescimoProcessContext result = (AcrescimoProcessContext) FacadeChainStartService.run(ServiceCatalog.acrescimoSalarioSolicitacao,context);
-        if(!colaboradorFound.getCargo().getSalario().equals(result.getContext().getCargo().getSalario())){
-            cargoRepository.save(result.getContext().getCargo());
+        var result = (String) FacadeChainStartService.run(ServiceCatalog.acrescimoSalarioSolicitacao,context);
+        if(result.contains("Acrescimo de")){
+            cargoRepository.save(colaboradorFound.getCargo());
+        }else{
+            throw new BusinessException(result);
         }
-        return ColaboradorMapper.INSTANCE.toDTO(Objects.isNull(result.getContext()) ? colaboradorFound : result.getContext());
+        return ColaboradorMapper.INSTANCE.toDTO( colaboradorFound );
     }
 
 

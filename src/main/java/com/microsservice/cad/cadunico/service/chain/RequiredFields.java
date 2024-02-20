@@ -22,7 +22,7 @@ public class RequiredFields extends AcrescimoProcessoStep{
                 camposFaltantes.append(" Cargo não informado").append(N);
             }
 
-            if( Objects.nonNull(context.getContext().getCargo().getAnosExperienciaArea() <=0)){
+            if( Objects.isNull(context.getContext().getCargo().getAnosExperienciaArea()) || context.getContext().getCargo().getAnosExperienciaArea() <0){
                 camposFaltantes.append(" Anos Experiencia vazio.").append(N);
             }
 
