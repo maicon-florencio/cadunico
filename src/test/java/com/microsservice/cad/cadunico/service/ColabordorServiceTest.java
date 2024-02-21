@@ -3,6 +3,7 @@ package com.microsservice.cad.cadunico.service;
 import com.microsservice.cad.cadunico.builder.ColaboradorBuilder;
 import com.microsservice.cad.cadunico.dominio.Colaborador;
 import com.microsservice.cad.cadunico.exception.BusinessException;
+import com.microsservice.cad.cadunico.repository.CargoRepository;
 import com.microsservice.cad.cadunico.repository.ColaboradorRepository;
 import com.microsservice.cad.cadunico.service.dto.ColaboradorDTO;
 import com.microsservice.cad.cadunico.service.impl.ColaboradorService;
@@ -22,6 +23,8 @@ public class ColabordorServiceTest {
     private ColaboradorService service;
     @MockBean
     private ColaboradorRepository repository;
+    @MockBean
+    private CargoRepository cargoRepository;
 
 
     @Test
@@ -124,5 +127,17 @@ public class ColabordorServiceTest {
 
         Assertions.fail(new BusinessException(ErroMsgutil.ERRO_COLABORADOR_NOT_FOUND));
 
+    }
+    @Test
+    void growUpAmountSalary_okay(){
+        var entity = ColaboradorBuilder.retornaClientCPF();
+        Mockito.when(repository.getColaboradorByDocumento(Mockito.anyString())).thenReturn(entity);
+        var result = service.growUpAmountSalary(entity.getDocumento());
+
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals( 1650.0, result.getCargo().getSalario());
+
+        Mockito.verify(repository, Mockito.times(1)).getColaboradorByDocumento(Mockito.anyString());
+        Mockito.verify(cargoRepository, Mockito.times(1)).save(Mockito.any());
     }
 }

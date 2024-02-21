@@ -23,8 +23,6 @@ public class CargoServiceTest {
     }
     @Test
     void findById_Okay(){
-        Long id =1L;
-
         var result =  service.getById(1L);
         Assertions.assertNotNull(result);
     }
