@@ -20,7 +20,7 @@ public class AcrescimoProcessContext {
     }
 
 
-    public void addProcessResult(Object result){this.processResult = result;}
+    public void setProcessResult(Object result){this.processResult = result;}
 
     public Object getProcessResult(){return processResult;}
 }

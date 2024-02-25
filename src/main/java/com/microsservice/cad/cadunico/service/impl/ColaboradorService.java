@@ -1,5 +1,6 @@
 package com.microsservice.cad.cadunico.service.impl;
 
+import com.microsservice.cad.cadunico.dominio.Colaborador;
 import com.microsservice.cad.cadunico.exception.BusinessException;
 import com.microsservice.cad.cadunico.mapper.ColaboradorMapper;
 import com.microsservice.cad.cadunico.repository.CargoRepository;
@@ -65,15 +66,17 @@ public class ColaboradorService {
 
     public ColaboradorDTO growUpAmountSalary(String documento){
         var colaboradorFound =  colaboradorRepository.getColaboradorByDocumento(documento);
+        String result = contextStepAnalise(colaboradorFound);
+        if(result.contains("Erro:"))  throw new BusinessException(result);
+        cargoRepository.save(colaboradorFound.getCargo());
+        return ColaboradorMapper.INSTANCE.toDTO( colaboradorFound );
+    }
+
+    private String contextStepAnalise(Colaborador colaboradorFound) {
         var context =  new AcrescimoProcessContext();
         context.reset();
         context.put(colaboradorFound);
-        var result = (String) FacadeChainStartService.run(ServiceCatalog.acrescimoSalarioSolicitacao,context);
-
-        if(result.contains("Erro:"))  throw new BusinessException(result);
-
-        cargoRepository.save(colaboradorFound.getCargo());
-        return ColaboradorMapper.INSTANCE.toDTO( colaboradorFound );
+        return  (String) FacadeChainStartService.run(ServiceCatalog.acrescimoSalarioSolicitacao,context);
     }
 
 
