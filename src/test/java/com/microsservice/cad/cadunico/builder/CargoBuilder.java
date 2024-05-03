@@ -59,9 +59,14 @@ public class CargoBuilder {
     public static List<Cargo> entities(){
         var ent1 = createEntity();
         var ent2 = createEntity();
+        var ent3 = createEntity();
         ent2.setId(4L);
         ent2.setSalario(5541.5);
         ent2.setNomeCargo("SCRUM MASTER");
-        return Arrays.asList(ent1,ent2);
+
+        ent3.setId(5L);
+        ent3.setNomeCargo("UX ANALIST");
+        ent3.setSalario(6000.4);
+        return Arrays.asList(ent1,ent2,ent3);
     }
 }

@@ -10,6 +10,8 @@ import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.Collections;
+
 @SpringBootTest
 public class CargoServiceTest {
 
@@ -22,12 +24,7 @@ public class CargoServiceTest {
         var cargos = CargoBuilder.entities();
         repository.saveAll(cargos);
     }
-    @Test
-    void findById_Okay(){
-        var result =  service.getById(1L);
-        Assertions.assertNotNull(result);
-        Assertions.assertEquals("MIDDLE", result.getMaturidade());
-    }
+
 
     @Test
     void cargoSave_ok(){
@@ -90,4 +87,10 @@ public class CargoServiceTest {
         Mockito.verify(repository, Mockito.never()).save(Mockito.any());
     }
 
+    @Test
+    void findById_Okay(){
+        var result =  service.getById(1L);
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals("MIDDLE", result.getMaturidade());
+    }
 }
