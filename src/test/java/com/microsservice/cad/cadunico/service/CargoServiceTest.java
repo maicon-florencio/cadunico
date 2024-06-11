@@ -5,12 +5,12 @@ import com.microsservice.cad.cadunico.dominio.enumeration.MaturidadeCargoEnum;
 import com.microsservice.cad.cadunico.repository.CargoRepository;
 import com.microsservice.cad.cadunico.service.dto.CargoDTO;
 import com.microsservice.cad.cadunico.service.impl.CargoService;
-import org.junit.jupiter.api.*;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import java.util.Collections;
 
 @SpringBootTest
 public class CargoServiceTest {
