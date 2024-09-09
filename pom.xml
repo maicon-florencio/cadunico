@@ -19,7 +19,7 @@
 		<lombok-mapstruct-binding.version>0.2.0</lombok-mapstruct-binding.version>
 		<maven-compile-plugin.version>3.8.1</maven-compile-plugin.version>
 		<springfox.version>3.0.0</springfox.version>
-		<mysql-connector.version>8.0.33</mysql-connector.version>
+		<mysql-connector.version>9.0.0</mysql-connector.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -66,8 +66,9 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>mysql</groupId>
-			<artifactId>mysql-connector-java</artifactId>
+			<groupId>com.mysql</groupId>
+			<artifactId>mysql-connector-j</artifactId>
+			<scope>runtime</scope>
 			<version>${mysql-connector.version}</version>
 		</dependency>
 
