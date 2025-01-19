@@ -24,6 +24,6 @@ public class CargoDTO implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING)
     private LocalDate dtFimCargo;
     private Integer anosExperienciaArea;
-    @JsonFormat(shape = JsonFormat.Shape.STRING)
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss")
     private LocalDateTime dtUpdated;
 }
